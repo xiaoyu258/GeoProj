@@ -1,14 +1,40 @@
 # GeoProj
-The source code of Blind Geometric Distortion Correction on Images Through Deep Learning by Li et al, CVPR 2019. [[Project]](https://xiaoyu258.github.io/projects/geoproj) [[Paper]](https://xiaoyu258.github.io/projects/geoproj/Li_Blind_Geometric_Distortion_CVPR_2019_paper.pdf)
 
-## Training
+### [Project page](https://xiaoyu258.github.io/projects/geoproj) | [Paper](https://arxiv.org/abs/1909.03459)
+
+The source code of Blind Geometric Distortion Correction on Images Through Deep Learning by Li et al, CVPR 2019. 
+
+<img src='imgs/results.jpg' align="center" width=850> 
+
+## Example results
+
+## Prerequisites
+- Linux or Windows
+- Python 3
+- CPU or NVIDIA GPU + CUDA CuDNN
+
+## Getting Started
 
 ### Dataset Generation
 In order to train the model using the provided code, the data needs to be generated in a certain manner. 
 Run the following command for dataset generation:
 ```bash
-python code/dataset_generate.py 
+python data/dataset_generate.py 
 ```
 
-## Evaluation
+### Training
 
+### Use a Pre-trained Model
+
+### Resampling
+
+## Citation
+```bash
+@inproceedings{li2019blind,
+  title={Blind Geometric Distortion Correction on Images Through Deep Learning},
+  author={Li, Xiaoyu and Zhang, Bo and Sander, Pedro V and Liao, Jing},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  pages={4855--4864},
+  year={2019}
+}
+```
