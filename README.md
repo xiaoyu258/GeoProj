@@ -6,8 +6,6 @@ The source code of Blind Geometric Distortion Correction on Images Through Deep 
 
 <img src='imgs/results.jpg' align="center" width=850> 
 
-## Example results
-
 ## Prerequisites
 - Linux or Windows
 - Python 3
