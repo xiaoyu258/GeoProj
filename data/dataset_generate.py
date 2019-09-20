@@ -4,19 +4,37 @@ import skimage.io as io
 from skimage.transform import rescale
 import scipy.io as scio
 import distortion_model
+import argparse
+import os
 
-sourcePath = '/home/xliea/GenerateData256/dataset512'
+# For parsing commandline arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("--sourcedir", type=str, default='/home/xliea/GeoProj/Dataset/Dataset_512_ori')
+parser.add_argument("--datasetdir", type=str, default='/home/xliea/GeoProj/Dataset/Dataset_256_gen')
+parser.add_argument("--trainnum", type=int, default=50000, help='number of the training set')
+parser.add_argument("--testnum", type=int, default=5000, help='number of the test set')
+args = parser.parse_args()
 
+if not os.path.exists(args.datasetdir):
+    os.mkdir(args.datasetdir)
 
-trainDisPath = '/home/xliea/GenerateData256/GeneralDataset256/train/distorted'
-trainUvPath  = '/home/xliea/GenerateData256/GeneralDataset256/train/uv'
+trainDisPath = args.datasetdir + '/train_distorted'
+trainUvPath  = args.datasetdir + '/train_flow'
+testDisPath = args.datasetdir + '/test_distorted'
+testUvPath  = args.datasetdir + '/test_flow'
 
-testDisPath = '/home/xliea/GenerateData256/GeneralDataset256/test/distorted'
-testUvPath  = '/home/xliea/GenerateData256/GeneralDataset256/test/uv'
+if not os.path.exists(trainDisPath):
+    os.mkdir(trainDisPath)
+    
+if not os.path.exists(trainUvPath):
+    os.mkdir(trainUvPath)
+    
+if not os.path.exists(testDisPath):
+    os.mkdir(testDisPath)
 
-trainNum = 50000
-testNum  = 5000
-
+if not os.path.exists(testUvPath):
+    os.mkdir(testUvPath)
+    
 def generatedata(types, k, trainFlag):
     
     print(types,trainFlag,k)
@@ -26,21 +44,21 @@ def generatedata(types, k, trainFlag):
 
     parameters = distortion_model.distortionParameter(types)
     
-    OriImg = io.imread('%s%s%s%s' % (sourcePath, '/', str(k).zfill(6), '.jpg'))
+    OriImg = io.imread('%s%s%s%s' % (args.sourcedir, '/', str(k).zfill(6), '.jpg'))
 
     disImg = np.array(np.zeros(OriImg.shape), dtype = np.uint8)
     u = np.array(np.zeros((OriImg.shape[0],OriImg.shape[1])), dtype = np.float32)
     v = np.array(np.zeros((OriImg.shape[0],OriImg.shape[1])), dtype = np.float32)
     
-    cropImg = np.array(np.zeros((height/2,width/2,3)), dtype = np.uint8)
-    crop_u  = np.array(np.zeros((height/2,width/2)), dtype = np.float32)
-    crop_v  = np.array(np.zeros((height/2,width/2)), dtype = np.float32)
+    cropImg = np.array(np.zeros((int(height/2),int(width/2),3)), dtype = np.uint8)
+    crop_u  = np.array(np.zeros((int(height/2),int(width/2))), dtype = np.float32)
+    crop_v  = np.array(np.zeros((int(height/2),int(width/2))), dtype = np.float32)
     
     # crop range
-    xmin = width*1/4
-    xmax = width*3/4 - 1
-    ymin = height*1/4
-    ymax = height*3/4 - 1
+    xmin = int(width*1/4)
+    xmax = int(width*3/4 - 1)
+    ymin = int(height*1/4)
+    ymax = int(height*3/4 - 1)
 
     for i in range(width):
         for j in range(height):
@@ -89,7 +107,7 @@ def generatepindata(types, k, trainFlag):
 
     parameters = distortion_model.distortionParameter(types)
     
-    OriImg = io.imread('%s%s%s%s' % (sourcePath, '/', str(k).zfill(6), '.jpg'))
+    OriImg = io.imread('%s%s%s%s' % (args.sourcedir, '/', str(k).zfill(6), '.jpg'))
     temImg = rescale(OriImg, 0.5, mode='reflect')
     ScaImg = skimage.img_as_ubyte(temImg)
     
@@ -137,15 +155,15 @@ def generatepindata(types, k, trainFlag):
         
         
 for types in ['barrel','rotation','shear','wave']: 
-    for k in range(trainNum):
+    for k in range(args.trainnum):
         generatedata(types, k, trainFlag = True)
 
-    for k in range(trainNum, trainNum + testNum):
+    for k in range(args.trainnum, args.trainnum + args.testnum):
         generatedata(types, k, trainFlag = False)
         
 for types in ['pincushion','projective']: 
-    for k in range(trainNum):
+    for k in range(args.trainnum):
         generatepindata(types, k, trainFlag = True)
 
-    for k in range(trainNum, trainNum + testNum):
+    for k in range(args.trainnum, args.trainnum + args.testnum):
         generatepindata(types, k, trainFlag = False)
