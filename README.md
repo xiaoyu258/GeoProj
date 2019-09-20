@@ -20,7 +20,13 @@ You can use any distortion-free images to generate the dataset. In this paper, w
 
 Run the following command for dataset generation:
 ```bash
-python data/dataset_generate.py 
+python data/dataset_generate.py [--sourcedir [PATH]] [--datasetdir [PATH]] 
+                                [--trainnum [NUMBER]] [--testnum [NUMBER]]
+
+--sourcedir           Path to original non-distorted images
+--datasetdir          Path to the generated dataset
+--trainnum            Number of generated training samples
+--testnum             Number of generated test samples
 ```
 
 ### Training
