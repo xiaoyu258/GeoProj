@@ -26,9 +26,8 @@ python data/dataset_generate.py [--sourcedir [PATH]] [--datasetdir [PATH]]
 --sourcedir           Path to original non-distorted images
 --datasetdir          Path to the generated dataset
 --trainnum            Number of generated training samples
---testnum             Number of generated test samples
+--testnum             Number of generated testing samples
 ```
-
 ### Training
 
 ### Use a Pre-trained Model
