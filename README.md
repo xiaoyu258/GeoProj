@@ -16,7 +16,7 @@ The source code of Blind Geometric Distortion Correction on Images Through Deep 
 ### Dataset Generation
 In order to train the model using the provided code, the data needs to be generated in a certain manner. 
 
-You can use any distortion-free images to generate the dataset. In this paper, we use [Places365-Standard dataset](http://places2.csail.mit.edu/download.html) at the resolution of 512*512 as the original non-distorted images to generate the dataset.
+You can use any distortion-free images to generate the dataset. In this paper, we use [Places365-Standard dataset](http://places2.csail.mit.edu/download.html) at the resolution of 512*512 as the original non-distorted images to generate the 256*256 dataset.
 
 Run the following command for dataset generation:
 ```bash
