@@ -37,9 +37,12 @@ python trainNetM.py --h # if you want to train GeoNetM
 ```
 
 ### Use a Pre-trained Model
+You can download the pretrained model [here](https://drive.google.com/open?id=1Tdi92IMA-rrX2ozdUMvfiN0jCZY7wIp_).
+
+You can also use `eval.py` and modify the model path, image path and saved result path to your own directory to generate your own results.
 
 ### Resampling
-Import resample/resampling.rectification function to resample the distorted image by the forward flow.
+Import 'resample.resampling.rectification' function to resample the distorted image by the forward flow.
 
 The distorted image should be a Numpy array with the shape of H\*W\*3 for a color image or H\*W for a greyscale image, the forward flow should be an array with the shape of 2\*H\*W.
 
