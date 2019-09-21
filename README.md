@@ -28,7 +28,13 @@ python data/dataset_generate.py [--sourcedir [PATH]] [--datasetdir [PATH]]
 --trainnum            Number of generated training samples
 --testnum             Number of generated testing samples
 ```
+
 ### Training
+Run the following command for help message about optional arguments like learning rate, dataset directory, etc.
+```bash
+python trainNetS.py --h # if you want to train GeoNetS
+python trainNetM.py --h # if you want to train GeoNetM
+```
 
 ### Use a Pre-trained Model
 
