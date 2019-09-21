@@ -39,9 +39,9 @@ python trainNetM.py --h # if you want to train GeoNetM
 ### Use a Pre-trained Model
 
 ### Resampling
-import resample/resampling.rectification to use the function to resample the distorted image by the forward flow.
+Import resample/resampling.rectification function to resample the distorted image by the forward flow.
 
-The distorted image should be a numpy array with the shape of H\*W\*3 for a color image or H\*W for a greyscale image, the forward flow should be an array with the shape of 2\*H\*W.
+The distorted image should be a Numpy array with the shape of H\*W\*3 for a color image or H\*W for a greyscale image, the forward flow should be an array with the shape of 2\*H\*W.
 
 The function will return the resulting image and a mask to indicate whether each pixel will converge within the maximum iteration.
 ## Citation
